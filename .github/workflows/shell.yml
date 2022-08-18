@@ -2,7 +2,7 @@ name: shell
 on:
   push:
     paths:
-      - 'shell/*'
+      - 'shell/**'
 
 jobs:
   shellcheck:
