@@ -1,5 +1,6 @@
 # Script test files
 set(script_test_files
+  bundler-test.sh
   )
 
 # Add shellcheck targets for the various shells
