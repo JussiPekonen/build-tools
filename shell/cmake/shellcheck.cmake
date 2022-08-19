@@ -5,6 +5,13 @@ if(SHELLCHECK_NOTFOUND)
   message(NOTICE "*** Shellcheck targets cannot be created because the program is not installed! ***")
 endif()
 
+# A list of valid shells for shellcheck
+set(SHELLCHECK_VALID_SHELLS
+  dash
+  bash
+  ksh
+  sh
+  )
 
 # Internal macro for setting shellcheck target for optional shell
 macro(_shellcheck_target target_suffix shell files)
@@ -16,6 +23,7 @@ macro(_shellcheck_target target_suffix shell files)
   # Custom target that depends on the files
   add_custom_target(shellcheck${target_suffix}
     DEPENDS ${files}
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     )
   # Set the shellcheck shell option, if shell is given
   set(command_options)
@@ -52,7 +60,7 @@ function(shellcheck files)
       set(shellcheck_runner_target "-${shell}")    
     endif()
     # Create the target
-    _shellcheck_target("${shellcheck_runner_target}" "${shell}" ${files})
+    _shellcheck_target("${shellcheck_runner_target}" "${shell}" "${files}")
     # Add the custom shell-specific target as a dependency to the generic shell-specific target
     if(${optional_arguments_length} GREATER 1)
       # Shell target exists, add the custom target as a dependency
