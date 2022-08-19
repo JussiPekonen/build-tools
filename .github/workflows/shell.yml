@@ -3,9 +3,10 @@ on:
   push:
     paths:
       - 'shell/**'
+      - '.github/workflows/shell.yml'
 
 jobs:
-  shellcheck:
+  ShellSanityChecks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
