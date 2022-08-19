@@ -12,6 +12,8 @@ jobs:
         uses: actions/checkout@v3
       - name: Install shunit2
         run: sudo apt-get install -y shunit2
+      - name: Install ksh
+        run: sudo apt-get install -y ksh
       - name: Set up build system
         run: cmake . -Bout
       - name: Run shellcheck

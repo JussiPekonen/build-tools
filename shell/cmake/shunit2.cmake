@@ -9,7 +9,7 @@ endif()
 set(SHUNIT2_VALID_SHELLS
   dash
   bash
-  #ksh -> Disabled for now as we cannot guarantee that the Korn shell is installed on the system
+  ksh
   sh
   #zsh -> Need to be investigated a bit still why this shell does not work with shunit2
   )
