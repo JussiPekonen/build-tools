@@ -7,3 +7,5 @@ set(script_files
 foreach(shell ${SHELLCHECK_VALID_SHELLS})
   shellcheck("${script_files}" ${shell})
 endforeach()
+
+add_subdirectory(test)
