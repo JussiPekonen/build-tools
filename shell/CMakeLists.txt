@@ -1,3 +1,3 @@
 include(cmake/shellcheck.cmake)
 
-add_subdirectory(scripts)
+add_subdirectory(functions)
