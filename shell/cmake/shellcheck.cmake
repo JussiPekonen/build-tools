@@ -40,6 +40,11 @@ endmacro()
 
 # Function to setting up targets to run shellcheck on files
 function(shellcheck files)
+  # Do not add targets if the file list is empty
+  list(LENGTH files number_of_files)
+  if (${number_of_files} EQUAL 0)
+    return()
+  endif()
   # Add targets only if it is possible
   if(NOT SHELLCHECK_NOTFOUND)
     # Parse the optional arguments
