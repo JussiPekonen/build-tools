@@ -1,21 +1,10 @@
-# Try to find the shellcheck package first
-find_package(Shellcheck QUIET)
-
-# If shellcheck package is not found, try to find it ourselves
-if(NOT SHELLCHECK_FOUND)
-  # Use which, it is supported the most
-  execute_process(COMMAND which ARGS shellcheck
-    OUTPUT_VARIABLE SHELLCHECK_EXECUTABLE
-    ERROR_QUIET)
-  # Strip the newline from the end
-  string(REGEX REPLACE "\n" "" SHELLCHECK_EXECUTABLE ${SHELLCHECK_EXECUTABLE})
-  # Set the boolean flag depending on the executable path
-  if (NOT EXISTS ${SHELLCHECK_EXECUTABLE})
-    set(SHELLCHECK_FOUND FALSE)
-  else()
-    set(SHELLCHECK_FOUND TRUE)
-  endif()
+# Find the shellcheck program first
+find_program(SHELLCHECK_EXECUTABLE shellcheck)
+string(COMPARE EQUAL "${SHELLCHECK_EXECUTABLE}" "SHELLCHECK_EXECUTABLE-NOTFOUND" SHELLCHECK_NOTFOUND)
+if(SHELLCHECK_NOTFOUND)
+  message(NOTICE "*** Shellcheck targets cannot be created because the program is not installed! ***")
 endif()
+
 
 # Internal macro for setting shellcheck target for optional shell
 macro(_shellcheck_target target_suffix shell files)
@@ -44,7 +33,7 @@ endmacro()
 # Function to setting up targets to run shellcheck on files
 function(shellcheck files)
   # Add targets only if it is possible
-  if(SHELLCHECK_FOUND)
+  if(NOT SHELLCHECK_NOTFOUND)
     # Parse the optional arguments
     set(optional_arguments ${ARGN})
     list(LENGTH optional_arguments optional_arguments_length)
