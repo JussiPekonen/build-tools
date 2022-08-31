@@ -1,6 +1,7 @@
 # Script files
 set(script_files
   bundler.sh
+  shellcheck-bundler.sh
   )
 
 # Add shellcheck targets for the various shells
