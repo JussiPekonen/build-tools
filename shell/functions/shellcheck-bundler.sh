@@ -20,7 +20,7 @@ do
   for shell in bash dash ksh sh # Only these are supported by the shellcheck tool
   do
     shellcheck --external-sources --shell="\${shell}" "\${_filename}"
-    test "\$?" -ne 0 && break
+    test "\$?" -ne 0 && unset _current_dir _file _dir _filename && exit 1
   done
   cd "\${_current_dir}"
 done
