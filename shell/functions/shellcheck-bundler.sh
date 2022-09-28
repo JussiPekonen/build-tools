@@ -9,7 +9,7 @@ generateShellcheckRunner() {
 #!/bin/sh
 
 shellcheck --version > /dev/null
-test "$?" -ne 0 && echo "Shellcheck not installed! Aborting." > /dev/stderr && exit 1
+test "\$?" -ne 0 && echo "Shellcheck not installed! Aborting." > /dev/stderr && exit 1
 
 _current_dir=\`pwd\`
 for _file in ${_generate_shellcheck_files}
